@@ -1,6 +1,7 @@
 from flask import Flask
 import re
 from flask_cors import CORS
+import os
 
 app2 = Flask(__name__)
 CORS(app2)
@@ -13,8 +14,7 @@ def to_markdown(text):
     return textwrap.indent(text, '> ', predicate=lambda _: True)
 
 
-GOOGLE_API_KEY='AIzaSyAjgaUV_uyF7MRB_ei-p_DJGhrxsqFgmz0'
-genai.configure(api_key=GOOGLE_API_KEY)
+GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')genai.configure(api_key=GOOGLE_API_KEY)
 
 generation_config = {
     "temperature": 0.9,
@@ -95,10 +95,10 @@ def analyze():
     #print(processed_text)
 
     cl=remove(cleaned_text)
-    with open("output.txt", "w", encoding="utf-8") as f:
-        f.write(cl)
+    #with open("output.txt", "w", encoding="utf-8") as f:
+    #   f.write(cl)
 
     return (cl)
 
 if __name__ == '__main__':
-    app2.run(port=8888,debug=True)
+    app2.run(port=8888,debug=False)
