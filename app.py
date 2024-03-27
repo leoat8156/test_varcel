@@ -45,7 +45,6 @@ def to_markdown(text):
 # Function to analyze speech
 @app.route('/analyze-speech', methods=['POST'])
 def analyze():
-    return render_template('index.html')
     text = request.get_data(as_text=True)
     response = model.generate_content(f'''Analyze the text given below and identify emotional tones with a short explanation, and provide meaningful statistical insights.
     {text}
